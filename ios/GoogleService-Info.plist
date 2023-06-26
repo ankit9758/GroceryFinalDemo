@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>300110096690-qmb9sgt6837gi4p8t4pc8k4sn0trsujj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.300110096690-qmb9sgt6837gi4p8t4pc8k4sn0trsujj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>300110096690-pkn41376a69higsc78641ab7277k8ipi.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC4S3gaG9Ih8J_w-s0HE7Rb9GUDyu_1yvc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>300110096690</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.GroceryApp</string>
+	<key>PROJECT_ID</key>
+	<string>groceryapp-492e9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>groceryapp-492e9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:300110096690:ios:ff095aab9cfb573348cf2b</string>
+	<key>DATABASE_URL</key>
+	<string>https://groceryapp-492e9-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
