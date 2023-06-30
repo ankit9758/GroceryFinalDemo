@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet, Image,Keyboard,
-    Dimensions,SafeAreaView,ScrollView, TouchableOpacity } from 'react-native';
-import React, { useEffect,useState } from 'react';
+import {
+    View, Text, StyleSheet, Image, Keyboard,
+    Dimensions, SafeAreaView, ScrollView, TouchableOpacity
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { red, white, black } from "../utils/Colors";
 import AppTextInput from "../common/AppTextInput";
 import AppButton from "../common/AppButton";
@@ -17,7 +19,10 @@ import {
     GoogleSigninButton,
     statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { image_email,image_logo, image_password } from '../utils/Images';
+import { image_email, image_logo, image_password } from '../utils/Images';
+import Toast from "react-native-toast-message";
+import showCustomToast, { toastConfig } from "../utils/Toastconfig";
+import { ERROR, SUCESS } from '../utils/AppConstant';
 
 
 const LoginScreen = () => {
@@ -43,18 +48,21 @@ const LoginScreen = () => {
     useEffect(() => {
         GoogleSignin.configure({
 
-         //   webClientId: '300110096690-qmb9sgt6837gi4p8t4pc8k4sn0trsujj.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+            //   webClientId: '300110096690-qmb9sgt6837gi4p8t4pc8k4sn0trsujj.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
 
         });
     })
 
 
     const displayLoader = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            navigation.navigate('Main')
-        }, 5000);
+        console.log('Hello')
+        // setLoading(true);
+        // setTimeout(() => {
+        //     setLoading(false);
+        //     navigation.navigate('Main')
+        // }, 5000);
+      showCustomToast(SUCESS, 'Email is already exist.')
+  
     }
 
     const clearErrors = () => {
@@ -72,31 +80,31 @@ const LoginScreen = () => {
                 if (querySnapshot.docs.length > 0) {
                     if (querySnapshot.docs[0]._data.email == email &&
                         querySnapshot.docs[0]._data.password == password) {
-                       console.log('dataa---',JSON.stringify(querySnapshot.docs[0]._data))
-                       saveJSONToAsyncStorage(USER_DATA,querySnapshot.docs[0]._data)
+                        console.log('dataa---', JSON.stringify(querySnapshot.docs[0]._data))
+                        saveJSONToAsyncStorage(USER_DATA, querySnapshot.docs[0]._data)
                     } else {
-                       // showErrorToast('Email or password is incorrect.')
+                        // showErrorToast('Email or password is incorrect.')
                     }
                 } else {
-                  //  showErrorToast('Account not found.')
+                    //  showErrorToast('Account not found.')
                 }
             }).catch((error) => {
                 setLoading(false);
                 console.log(error)
-              //  showErrorToast(error)
-              
+                //  showErrorToast(error)
+
             })
     }
     const saveJSONToAsyncStorage = async (key, data) => {
         try {
-          const jsonData = JSON.stringify(data);
-          await AsyncStorage.setItem(key, jsonData);
-          console.log('JSON value saved successfully.');
-           //navigation.navigate('Main')    
+            const jsonData = JSON.stringify(data);
+            await AsyncStorage.setItem(key, jsonData);
+            console.log('JSON value saved successfully.');
+            //navigation.navigate('Main')    
         } catch (error) {
-          console.log('Error saving JSON value:', error);
+            console.log('Error saving JSON value:', error);
         }
-      };
+    };
 
 
     // Somewhere in your code
@@ -104,12 +112,12 @@ const LoginScreen = () => {
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
-            console.log('Googleauth -->',userInfo)
-            console.log('Googleauth -->',await GoogleSignin.isSignedIn())
+            console.log('Googleauth -->', userInfo)
+            console.log('Googleauth -->', await GoogleSignin.isSignedIn())
             signOut()
             //setState({ userInfo });
         } catch (error) {
-            console.log('Googleauth -->',error)
+            console.log('Googleauth -->', error)
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
             } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -122,15 +130,15 @@ const LoginScreen = () => {
         }
     };
 
-    const  signOut = async () => {
+    const signOut = async () => {
         try {
-          await GoogleSignin.signOut();
-          console.log('Googleauth -->',await GoogleSignin.isSignedIn())
+            await GoogleSignin.signOut();
+            console.log('Googleauth -->', await GoogleSignin.isSignedIn())
         } catch (error) {
-            console.log('Googleauth E -->',error)
-          console.error(error);
+            console.log('Googleauth E -->', error)
+            console.error(error);
         }
-      };
+    };
     // return (<View style={styles.sectionContainer}>
     //     <TouchableOpacity onPress={() => {signIn() }}>
     //         <Text style={styles.text}>Login Screen </Text>
@@ -139,116 +147,118 @@ const LoginScreen = () => {
     // </View>)
 
     return (
-            <SafeAreaView style={{flex:1,flexDirection:'column'}}  >
-                {/* <StatusBar backgroundColor='#1AFf0000' translucent={true} showHideTransition={true} /> */}
-                {loading && <OverlayActivityIndicator />}
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={{ paddingHorizontal: 20 }}>
-                        <Image source={image_logo} resizeMode="center" style={styles.image} />
-                        <Text style={styles.heading}>
-                            Login
+        <SafeAreaView style={{ flex: 1, flexDirection: 'column' }}  >
+            {/* <StatusBar backgroundColor='#1AFf0000' translucent={true} showHideTransition={true} /> */}
+            {loading && <OverlayActivityIndicator />}
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={{ paddingHorizontal: 20 }}>
+                    <Image source={image_logo} resizeMode="center" style={styles.image} />
+                    <Text style={styles.heading}>
+                        Login
+                    </Text>
+                    <View style={{ marginTop: 20 }} />
+                    <AppTextInput placeholder={'Enter Email Id'} type={'email-address'}
+                        icon={image_email} isLast={false} value={email}
+                        onChangeText={(text) => { setEmail(text) }}
+                        reference={emailRef}
+                        onSubmit={() => passwordRef.current.focus()} />
+                    {<Text style={[styles.errorText12]}>{emailError}</Text>}
+                    <AppTextInput placeholder={'Enter Password'}
+                        icon={image_password}
+                        isLast={true}
+                        isPassword={true}
+                        reference={passwordRef}
+                        onSubmit={() => Keyboard.dismiss()}
+                        value={password} onChangeText={(text) => { setPassword(text) }}
+                    />
+                    {<Text style={[styles.errorText12]}>{passwordError}</Text>}
+                    <TouchableOpacity onPress={() => {
+                        setFogotPasswordEmail('')
+                        setFogotPasswordEmailError('')
+                        setVisible(true)
+                    }}>
+                        <Text style={styles.forgotText}>
+                            Forgot Password?
                         </Text>
-                        <View style={{ marginTop: 20 }} />
-                        <AppTextInput placeholder={'Enter Email Id'} type={'email-address'}
-                            icon={image_email} isLast={false} value={email}
-                            onChangeText={(text) => { setEmail(text) }}
-                            reference={emailRef}
-                            onSubmit={() => passwordRef.current.focus()} />
-                        {<Text style={[styles.errorText12]}>{emailError}</Text>}
-                        <AppTextInput placeholder={'Enter Password'}
-                            icon={image_password}
-                            isLast={true} 
-                            isPassword={true}
-                            reference={passwordRef}
-                            onSubmit={() => Keyboard.dismiss()}
-                            value={password} onChangeText={(text) => { setPassword(text) }}
-                        />
-                        {<Text style={[styles.errorText12]}>{passwordError}</Text>}
+                    </TouchableOpacity>
+
+                    <View style={{ marginVertical: 20 }} />
+
+
+                    <AppButton title={'Login'} onPress={() => {
+                        displayLoader()
+                        // if (validateEmpty(email)) {
+
+                        //     setEmailError('Please enter Email')
+                        // } else if (!isValidEmail(email)) {
+                        //     setEmailError('Please enter valid email')
+                        // } else if (validateEmpty(password)) {
+                        //     setEmailError('')
+                        //     setPasswordError('Please enter password')
+                        // } else if (!validatePassword(password)) {
+                        //     setEmailError('')
+                        //     setPasswordError('Please enter valid password')
+                        // }
+                        // else {
+                        //     setEmailError('')
+                        //     setPasswordError('')
+                        //     checkLoginData()
+                        //     //displayLoader()
+                        // }
+
+
+
+                    }} />
+
+                    <View style={{
+                        marginTop: 10, marginBottom: 20, flexDirection: 'row',
+                        alignItems: 'center', alignContent: 'center', justifyContent: 'center'
+                    }}>
+                        <Text style={styles.alreadyText}>
+                            Don't have Account ?
+                        </Text>
                         <TouchableOpacity onPress={() => {
-                            setFogotPasswordEmail('')
-                            setFogotPasswordEmailError('')
-                            setVisible(true)
+                            // toastRef.current.show({
+                            //     type: 'warning',
+                            //     text: 'Please enter Email',
+                            //     duration: 2000
+                            // });
+                            clearErrors()
+                            navigation.navigate('Signup')
                         }}>
-                            <Text style={styles.forgotText}>
-                                Forgot Password?
+                            <Text style={styles.signupText}>
+                                Signup
                             </Text>
                         </TouchableOpacity>
 
-                        <View style={{ marginVertical: 20 }} />
 
-
-                        <AppButton title={'Login'} onPress={() => {
-
-                            if (validateEmpty(email)) {
-
-                                setEmailError('Please enter Email')
-                            } else if (!isValidEmail(email)) {
-                                setEmailError('Please enter valid email')
-                            } else if (validateEmpty(password)) {
-                                setEmailError('')
-                                setPasswordError('Please enter password')
-                            } else if (!validatePassword(password)) {
-                                setEmailError('')
-                                setPasswordError('Please enter valid password')
-                            }
-                            else {
-                                setEmailError('')
-                                setPasswordError('')
-                                checkLoginData()
-                                //displayLoader()
-                            }
-
-                            signIn()
-
-                        }} />
-
-                        <View style={{
-                            marginTop: 10, marginBottom: 20, flexDirection: 'row',
-                            alignItems: 'center', alignContent: 'center', justifyContent: 'center'
-                        }}>
-                            <Text style={styles.alreadyText}>
-                                Don't have Account ?
-                            </Text>
-                            <TouchableOpacity onPress={() => {
-                                // toastRef.current.show({
-                                //     type: 'warning',
-                                //     text: 'Please enter Email',
-                                //     duration: 2000
-                                // });
-                                clearErrors()
-                                navigation.navigate('Signup')
-                            }}>
-                                <Text style={styles.signupText}>
-                                    Signup
-                                </Text>
-                            </TouchableOpacity>
-
-
-                        </View>
                     </View>
+                </View>
 
 
-                </ScrollView>
-                <ForgotPasswordModal modelVisible={visible} title={'Forgot Password?'}
-                    yesText={'Submit'} onNoClick={() => {
-                        setVisible(false)
-                    }}
-                    email={fogotPasswordEmail}
-                    setEmail={setFogotPasswordEmail}
-                    emailError={fogotPasswordEmailError}
-                    setFogotPasswordEmailError={setFogotPasswordEmailError}
-                    onYesClick={(emailId) => {
-                        console.log('Email---' + emailId)
-                        setVisible(false)
-                        toastRef.current.show({
-                            type: 'warning',
-                            text: 'Please enter Email',
-                            duration: 2000
-                        });
-                    }}
-                />
-            </SafeAreaView>
-      
+            </ScrollView>
+            <Toast config={toastConfig} />
+            <ForgotPasswordModal modelVisible={visible} title={'Forgot Password?'}
+                yesText={'Submit'} onNoClick={() => {
+                    setVisible(false)
+                }}
+                email={fogotPasswordEmail}
+                setEmail={setFogotPasswordEmail}
+                emailError={fogotPasswordEmailError}
+                setFogotPasswordEmailError={setFogotPasswordEmailError}
+                onYesClick={(emailId) => {
+                    console.log('Email---' + emailId)
+                    setVisible(false)
+                    toastRef.current.show({
+                        type: 'warning',
+                        text: 'Please enter Email',
+                        duration: 2000
+                    });
+                }}
+            />
+           
+        </SafeAreaView>
+
 
     );
 
