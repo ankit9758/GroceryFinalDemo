@@ -1,6 +1,8 @@
+
 {
   "project_info": {
     "project_number": "300110096690",
+    "firebase_url": "https://groceryapp-492e9-default-rtdb.firebaseio.com",
     "project_id": "groceryapp-492e9",
     "storage_bucket": "groceryapp-492e9.appspot.com"
   },
@@ -14,7 +16,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "300110096690-qt9ja8opjptld8dja72rtf7m3susknjs.apps.googleusercontent.com",
+          "client_id": "300110096690-t6kf0n4efbsr5t2m4tetqpp8l5fa2n6q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +31,13 @@
             {
               "client_id": "300110096690-qt9ja8opjptld8dja72rtf7m3susknjs.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "300110096690-qmb9sgt6837gi4p8t4pc8k4sn0trsujj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.GroceryApp"
+              }
             }
           ]
         }

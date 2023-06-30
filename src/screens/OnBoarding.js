@@ -88,7 +88,6 @@ export default function OnBoardingScreen() {
             <Animated.View style={{
                 height: height * 0.2,
                 justifyContent: 'center',
-                // alignItems: 'center',
                 flexDirection: 'column'
             }}>
                 <View
@@ -114,10 +113,10 @@ export default function OnBoardingScreen() {
                 <View style={{ marginTop: 10, flex: 1, justifyContent: 'center',marginHorizontal:20 }}>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity onPress={() => {
-                            // navigation.reset({
-                            //     key: 'Login',
-                            //     routes: [{ name: 'Login' }]
-                            // })
+                            navigation.reset({
+                                key: 'Login',
+                                routes: [{ name: 'Login' }]
+                            })
                         }}
                             style={[stylesApp.btn
                                 , { backgroundColor: 'transparent', borderWidth: 1, borderColor: 'white', marginRight: 5 }]}>
@@ -128,10 +127,10 @@ export default function OnBoardingScreen() {
                                 setCurrentIndex(currentIndex + 1)
                                 ref.current.scrollToIndex({ animated: true, index: parseInt(currentIndex) + 1 })
                             } else {
-                                // navigation.reset({
-                                //     key: 'Login',
-                                //     routes: [{ name: 'Login' }]
-                                // })
+                                navigation.reset({
+                                    key: 'Login',
+                                    routes: [{ name: 'Login' }]
+                                })
                             }
                         }} style={[stylesApp.btn, { marginLeft: 5 }]} >
                             <Text style={stylesApp.appTextBold16}>{currentIndex < slides.length - 1 ? `NEXT` : `SUBMIT`}</Text>
