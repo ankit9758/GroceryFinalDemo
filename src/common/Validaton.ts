@@ -40,3 +40,6 @@
      return re.test(name.trim());
    };
    
+   export const returnFilterValue = (value: string) => {
+    return value != null ? value : ''
+  };

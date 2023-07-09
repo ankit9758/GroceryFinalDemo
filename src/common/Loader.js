@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { darkRed } from '../utils/Colors';
 
 const OverlayActivityIndicator = () => {
   return (
     <View style={styles.overlay}>
-      <ActivityIndicator  size={70}  color="red"  />
+      <ActivityIndicator size={60} color={darkRed} style={{transform:[{scale:3}]}} />
     </View>
   );
 };
@@ -14,9 +15,10 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:50,
-    backgroundColor: 'rgba(255, 255, 255 )',
-    zIndex: 9999,
+ 
+   // marginTop:50,
+    backgroundColor: '#00000000',
+    zIndex: 1,
   },
 });
 

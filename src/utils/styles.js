@@ -1,6 +1,6 @@
 
 import { StyleSheet } from "react-native"
-import { black, green, red, white } from "./Colors";
+import { black, green, primaryColor, white } from "./Colors";
 
 
 const stylesApp = StyleSheet.create({
@@ -44,13 +44,15 @@ const stylesApp = StyleSheet.create({
 
   },
   appButtonContainer: {
-    backgroundColor:red,
-    elevation: 8,
-    borderRadius: 30,
-    paddingVertical: 12,
+    backgroundColor:primaryColor,
+    height: 50,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent:'center',
+  //  paddingVertical: 12,
     paddingHorizontal: 12,
     marginVertical: 10,
-    elevation:5
+  //  elevation:5
   },
   indicator: {
     height: 2.5,
@@ -76,7 +78,7 @@ const stylesApp = StyleSheet.create({
 
   title: {
     fontSize: 22,
-    color: red,
+    color: primaryColor,
     marginTop: 20,
     fontFamily: 'Raleway-Black',
     textAlign: 'center',
@@ -84,7 +86,7 @@ const stylesApp = StyleSheet.create({
   },
   subTitle: {
     fontSize: 13,
-    color: red,
+    color: primaryColor,
     marginTop: 10,
     fontFamily: 'Raleway-Medium',
     textAlign: 'center',

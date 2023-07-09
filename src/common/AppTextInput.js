@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View, Image, TextInput } from "react-native"
 import { white } from "../utils/Colors";
 
 export default AppTextInput = ({ value, onChangeText, 
-  placeholder, type, icon,isLast,onSubmit,reference,isPassword,maxLength}) => (
+  placeholder, type, icon,isLast,onSubmit,reference,isPassword,maxLength,isEditable}) => (
   <View style={{
     width: '100%',
     height: 55,
@@ -23,6 +23,8 @@ export default AppTextInput = ({ value, onChangeText,
       numberOfLines={1} onChangeText={onChangeText}
        keyboardType={type ? type : 'default'} 
        maxLength={maxLength}
+       editable={isEditable}
+      
       blurOnSubmit={false} onSubmitEditing={onSubmit}
       ref={reference}
       />

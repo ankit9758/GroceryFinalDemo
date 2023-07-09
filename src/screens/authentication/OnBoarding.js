@@ -1,7 +1,7 @@
 import { View, Text, Dimensions, TouchableOpacity, Animated } from 'react-native';
 import React, { useRef, useState } from 'react';
-import { black, red } from '../utils/Colors';
-import stylesApp from '../utils/styles';
+import { black, primaryColor } from '../../utils/Colors';
+import stylesApp from '../../utils/styles';
 const { height, width } = Dimensions.get('window');
 
 import { useNavigation } from '@react-navigation/native'
@@ -104,7 +104,7 @@ export default function OnBoardingScreen() {
                                     width: currentIndex == index ? 50 : 8,
                                     height: currentIndex == index ? 10 : 8,
                                     borderRadius: currentIndex == index ? 5 : 4,
-                                    backgroundColor: currentIndex == index ? red : 'gray',
+                                    backgroundColor: currentIndex == index ? primaryColor : 'gray',
                                     marginLeft: 5,
                                 }} />
                         );

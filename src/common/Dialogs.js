@@ -1,5 +1,5 @@
 import { View, Text, Image, ScrollView, StyleSheet, Modal, Dimensions, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
-import { black, red, white } from '../utils/Colors';
+import { black, primaryColor, white } from '../utils/Colors';
 import AppButton from './AppButton';
 const { height, width } = Dimensions.get('window');
 import AppTextInput from './AppTextInput';
@@ -106,7 +106,7 @@ const stylesModal = StyleSheet.create({
     },
     errorText12: {
         fontSize: 13,
-        color: red,
+        color: primaryColor,
         fontFamily: 'Raleway-Regular',
         textAlign:'left',
         alignSelf:'flex-start',
